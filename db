@@ -1,0 +1,6 @@
+INSERT INTO usuarios (username, password) VALUES ('asd', 'asdasd');
+CREATE TABLE usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
