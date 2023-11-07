@@ -1,6 +1,5 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import jwt from 'express-jwt';
 import jsonwebtoken from 'jsonwebtoken';
 import mysql from 'mysql2';
 import { fileURLToPath } from 'url';
@@ -16,10 +15,10 @@ const __dirname = dirname(__filename);
 
 // Configura la conexión a la base de datos MySQL
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Contrasena12',
-  database: 'autenticar',
+  host: '---',
+  user: '---',
+  password: '---',
+  database: '---',
 });
 
 db.connect((err) => {
@@ -34,10 +33,10 @@ db.connect((err) => {
 const secretKey = 'secretKey';
 
 
-function authenticateToken(req, res, next) {
+function autToken(req, res, next) {
     const token = req.cookies.token;
   
-    if (token === undefined) {
+    if (!token) {
       return res.status(401).json({ error: 'No se proporcionó token' });
     }
   
@@ -53,7 +52,7 @@ function authenticateToken(req, res, next) {
     res.sendFile(`${__dirname}/index.html`);
   });
  
-  app.get('/protegido', authenticateToken, (req, res) => {
+  app.get('/protegido', autToken, (req, res) => {
     res.json({ message: 'Esta es una ruta protegida' });
   });
 
